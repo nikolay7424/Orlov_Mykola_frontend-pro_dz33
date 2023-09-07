@@ -1,33 +1,47 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count0, setCount0] = useState(0)
+  const [count1, setCount1] = useState(0)
+  const [count2, setCount2] = useState(0)
+  const [count3, setCount3] = useState(0)
+  const countArr = [count0, count1, count2, count3]
+  const emojiArr = ['😁', '🤔', '😥', '😎']
+  const [bestEmoji, setBestEmoji] = useState('')
+  
+  function calculateBestEmoji() {
+    const emoji = emojiArr[countArr.indexOf(Math.max(...countArr))]
+    setBestEmoji(emoji)  
+  }
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
       <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
+        Click on your favourite emoji
       </p>
+      <div className="card">
+        <button onClick={() => setCount0((count) => count + 1)}>
+          vote for {emojiArr[0]} {count0}
+        </button>
+        <button onClick={() => setCount1((count) => count + 1)}>
+          vote for {emojiArr[1]}  {count1}
+        </button>
+        <button onClick={() => setCount2((count) => count + 1)}>
+          vote for {emojiArr[2]}  {count2}
+        </button>
+        <button onClick={() => setCount3((count) => count + 1)}>
+          vote for {emojiArr[3]}  {count3}
+        </button>
+      </div>
+      <div className="card">
+        <button onClick={calculateBestEmoji}>
+          show best emoji
+        </button>
+        <p>best emoji is {bestEmoji}</p>
+      </div>
+
     </>
   )
 }
